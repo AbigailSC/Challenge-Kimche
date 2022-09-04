@@ -8,44 +8,41 @@ export const Searchbar = (props) => {
   const { handleSubmit } = props
   const [name, setName] = useState("")
   const [country, setCountry] = useState(null)
+  // Decidi no utilizar el filter de la query countries porque tendria que crear otra consulta para pasar el codigo al filtro y seria redundante dado que desde el filtrado en el componente ya puedo sacar los datos que necesito
   const GET_COUNTRIES = gql`
     query GET_COUNTRIES{
       countries {
-        name
         code
+        name
+        continent {
+          code
+          name
+        }
+        capital
+        languages {
+          code
+          name
+        }
+        emojiU
+        states {
+          code
+          name
+        }
+        
       }
     }
   `
   const { loading, data } = useQuery(GET_COUNTRIES)
   const filterQueryCountry = (name) => {
     if (!loading) {
-      const findCountry = data.countries.find((country) => country.name.toLowerCase() === name.toLowerCase())
+      const findCountry = data.countries.find((country) => country.name.toLowerCase().includes(name.toLowerCase()))
       return findCountry
     }
   }
-  // const [country, setCountry] = useState(null)
-  // const countryFound = gql`
-  //   query findCountry($nameToSearch: String!){
-  //     country (cade: $nameToSearch) {
-  //       name
-  //       code
-  //       capital
-  //     }
-  //   }
-  // `
-  // const [getCountry, result] = useLazyQuery(countryFound)
-  // useEffect(() => {
-  //   if (result.data) {
-  //     setCountry(result.data.findCountry)
-  //   }
-  // },[result])
-  
-  
-
   const handleInput = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setName(e.target.value);
-    setCountry(filterQueryCountry(e.target.value))
+    setCountry(filterQueryCountry(e.target.value));
   }
   return (
   <Flex>
