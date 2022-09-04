@@ -1,33 +1,15 @@
-import React from 'react'
-import { Searchbar } from '../Searchbar/Searchbar'
-import { SelectRadio } from '../SelectRadio/SelectRadio'
-import { gql } from "apollo-boost";
-import { useQuery } from '@apollo/react-hooks';
-import { Text } from '../styles/styles';
-
-const allCountries = gql`
-  query {
-    countries {
-      name
-      code
-    }
-  }
-`
+import React from 'react';
+import { Searchbar } from '../Searchbar/Searchbar';
+import { SelectRadio } from '../SelectRadio/SelectRadio';
 
 export const Home = () => {
-  const { data, loading } = useQuery(allCountries)
-  console.log(data)
+  const handleSubmit = (e) => {
+    console.log(e)
+  }
   return (
-   <>
-   {loading 
-    ? <Text>Loading</Text> 
-    : (<>
-      <Text>Info</Text>
-      {data?.countries?.map((country) => country.name).join(', ')}
-    </>)
-   }
-      <Searchbar />
-      <SelectRadio />
-   </>
+  <>
+    <Searchbar handleSubmit={handleSubmit} />
+    <SelectRadio />
+  </>
   )
 }
