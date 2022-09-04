@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text } from "../styles/styles";
+import { Flex, Text } from "../../styles/globalStyles";
 
 export const CardCountry = ( { name, code, continent, capital, languages, emojiU, states } ) => {
   return (

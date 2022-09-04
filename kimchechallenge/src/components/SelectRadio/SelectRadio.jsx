@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from "react";
-import { Container, Flex, Heading, HStack, Label, RadioButton } from '../styles/styles'
+import { Container, Flex, Heading, HStack, Label, RadioButton } from '../../styles/globalStyles'
 
 export const SelectRadio = () => {
   const [select, setSelect] = useState("continent")
