@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: 0 15%;
   padding: 10px 25px;
 `;
@@ -27,6 +29,7 @@ export const Input = styled.input`
     outline: none;
   }
   background-color: red;
+  color: white;
 `;
 export const Icon = styled.img`
   padding: 10px;
