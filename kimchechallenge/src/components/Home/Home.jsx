@@ -1,8 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
-import { CardCountry } from '../CardCountry/CardCountry';
-import { Searchbar } from '../Searchbar/Searchbar';
-import { SelectRadio } from '../SelectRadio/SelectRadio';
+import React, { useState } from "react";
+import { CardCountry } from "../CardCountry/CardCountry";
+import { Searchbar } from "../Searchbar/Searchbar";
+import { SelectRadio } from "../SelectRadio/SelectRadio";
 
 export const Home = () => {
   const [ findCountry, setFindCountry ] = useState(null)
@@ -19,9 +18,9 @@ export const Home = () => {
       name = {findCountry?.name}
       continent = {findCountry?.continent}
       capital = {findCountry?.capital}
+      emoji = {findCountry?.emoji}
       emojiU = {findCountry?.emojiU}
       languages = {findCountry?.languages}
-      states = {findCountry?.states}
     />
   </>
   )
