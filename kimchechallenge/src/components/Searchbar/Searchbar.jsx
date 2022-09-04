@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Heading, Flex, Text, Input, Icon, HStack } from "../styles/styles";
+import { Heading, Flex, Text, Input, Icon, HStack } from "../../styles/globalStyles";
 import iconSearch from "../../assets/iconSearch.svg";
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';

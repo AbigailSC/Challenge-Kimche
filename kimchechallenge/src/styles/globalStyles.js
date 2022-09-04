@@ -82,3 +82,9 @@ export const RadioButton = styled.input`
   border-radius: 10px;
 }
 `;
+
+export const Box = styled.div`
+  display: flex;
+  flex-direction: row;
+  background-color: #E2E8F0;
+`
