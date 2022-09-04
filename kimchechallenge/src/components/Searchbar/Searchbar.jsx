@@ -23,41 +23,41 @@ export const Searchbar = (props) => {
           code
           name
         }
+        emoji
         emojiU
-        states {
-          code
-          name
-        }
-        
       }
     }
   `
   const { loading, data } = useQuery(GET_COUNTRIES)
   const filterQueryCountry = (name) => {
     if (!loading) {
-      const findCountry = data.countries.find((country) => country.name.toLowerCase().includes(name.toLowerCase()))
+      const findCountry = data.countries.filter((country) => country.name.toLowerCase().includes(name.toLowerCase()))
       return findCountry
     }
   }
+  console.log(filterQueryCountry("chi"))
   const handleInput = (e) => {
     e.preventDefault();
     setName(e.target.value);
     setCountry(filterQueryCountry(e.target.value));
   }
+  const handleSearch = (e) => {
+    e.preventDefault()
+    handleSubmit(country)
+  }
   return (
   <Flex>
     <Heading>Country search 🗺️</Heading>
-    <Text>Access all countries from one place</Text>
+    <Text color="#718096">Access all countries from one place</Text>
     <HStack>
       <Input
         type="text"
-        placeholder="E.g. Argentina"
+        placeholder="Search for a country..."
         value={name}
         onChange={(e) => handleInput(e)}
       />
-      <Icon src={iconSearch} onClick={() => handleSubmit(country) }/>
+      <Icon src={iconSearch} onClick={(e) => handleSearch(e)}/>
     </HStack>
-    
   </Flex>
   )
 }
