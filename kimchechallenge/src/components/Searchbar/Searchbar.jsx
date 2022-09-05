@@ -6,8 +6,11 @@ import { useQuery } from '@apollo/react-hooks';
 
 export const Searchbar = (props) => {
   const { handleSubmit } = props
-  const [name, setName] = useState("")
-  const [country, setCountry] = useState(null)
+  const [input, setInput] = useState({
+    name: ""
+  })
+  const [country, setCountry] = useState("")
+  const [errors, setErrors] = useState({})
   // Decidi no utilizar el filter de la query countries porque tendria que crear otra consulta para pasar el codigo al filtro y seria redundante dado que desde el filtrado en el componente ya puedo sacar los datos que necesito
   const GET_COUNTRIES = gql`
     query GET_COUNTRIES{
@@ -15,12 +18,10 @@ export const Searchbar = (props) => {
         code
         name
         continent {
-          code
           name
         }
         capital
         languages {
-          code
           name
         }
         emoji
@@ -29,21 +30,41 @@ export const Searchbar = (props) => {
     }
   `
   const { loading, data } = useQuery(GET_COUNTRIES)
-  const filterQueryCountry = (name) => {
+  const regexValidateName = /^[a-zA-Z\s]+$/
+  const validateName = (input) => {
+    const errors = {}
+    if (input.name.length < 3) {
+      errors.name = "debe ser mayor de 2 caracteres"
+    } else if (!regexValidateName.test(input.name)) {
+      errors.name = "invalido, caracteres rancios"
+    }
+    return errors
+  }
+  // Creo una funcion validadora para tener más control sobre el input
+  const filterQueryCountry = (input) => {
     if (!loading) {
-      const findCountry = data.countries.filter((country) => country.name.toLowerCase().includes(name.toLowerCase()))
+      const findCountry = data?.countries.filter((country) => country.name.toLowerCase().includes(input.name.toLowerCase()))
       return findCountry
     }
   }
-  console.log(filterQueryCountry("chi"))
   const handleInput = (e) => {
     e.preventDefault();
-    setName(e.target.value);
-    setCountry(filterQueryCountry(e.target.value));
+    setInput({
+      [e.target.name]: e.target.value
+    });
+    setErrors(
+      validateName({
+        [e.target.name]: e.target.value
+      })
+    )
+    
   }
   const handleSearch = (e) => {
     e.preventDefault()
-    handleSubmit(country)
+    if (!Object.keys(errors).length) {
+      setCountry(filterQueryCountry(input));
+      handleSubmit(country)
+    }
   }
   return (
   <Flex>
@@ -53,11 +74,15 @@ export const Searchbar = (props) => {
       <Input
         type="text"
         placeholder="Search for a country..."
-        value={name}
+        name="name"
+        value={input.input}
         onChange={(e) => handleInput(e)}
       />
-      <Icon src={iconSearch} onClick={(e) => handleSearch(e)}/>
+      <Icon src={iconSearch} onClick={(e) => handleSearch(e) }/>
     </HStack>
+    {errors.name && (
+      <Text>{errors.name}</Text>
+    )}
   </Flex>
   )
 }
