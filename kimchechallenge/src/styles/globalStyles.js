@@ -105,7 +105,7 @@ export const Box = styled.div`
   background-color: ${getColor};
   padding: 30px 40px;
   width: 340px;
-  height: 280px;
+  height: 300px;
   border-radius: 5%;
   align-items: flex-start;
   justify-content: center;
@@ -121,8 +121,7 @@ export const Badge = styled.div`
 `
 
 export const Hr = styled.hr`
-  height: 1px;
-  color: green;
   width: 100%;
   border: none;
+  border-bottom: 1px solid #fff;
 `
