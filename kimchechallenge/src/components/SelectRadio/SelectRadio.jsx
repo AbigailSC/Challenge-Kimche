@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react"
 import { useState } from "react";
 import { Container, Flex, Heading, HStack, Label, RadioButton } from '../../styles/globalStyles'
 
 export const SelectRadio = (props) => {
-  const { handleSelection } = props
-  const [select, setSelect] = useState("continent")
+  const { handleSelection } = props;
+  const [select, setSelect] = useState("continent");
   const handleSelectRadio = (e) => {
     setSelect(e.target.value)
     handleSelection(e.target.value)
-  }
+  };
   return (
     <Flex>
       <HStack justifyContent="space-between">
