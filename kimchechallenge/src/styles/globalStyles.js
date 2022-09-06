@@ -104,7 +104,7 @@ export const Box = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${getColor};
-  margin-right: 40px;
+  margin: 30px 40px;
   padding: 30px 40px;
   width: 300px;
   height: 300px;
