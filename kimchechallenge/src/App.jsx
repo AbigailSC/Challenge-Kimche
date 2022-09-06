@@ -2,6 +2,8 @@ import React from "react";
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { Home } from "./components/Home/Home";
+import { GlobalStyle } from "./styles/globalStyles";
+import CountryState from "./context/Country/CountryState";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -10,7 +12,10 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
-    <Home/>
+    <CountryState>
+      <GlobalStyle/>
+      <Home/>
+    </CountryState>
   </ApolloProvider>
 );
 export default App;
