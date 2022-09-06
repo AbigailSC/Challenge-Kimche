@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     background: #FAFBF7;
     color: #0A1F28;
+    /* border: 3px solid red; */
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -16,9 +17,9 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Flex = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: 20px 15%;
-  padding: 10px 25px;
+  flex-direction: ${(props) => props.flexDir || "column"};
+  margin: ${(props) => props.margin || "20px 15%"};
+  padding: ${(props) => props.padding || "10px 25px"};
 `;
 
 export const Heading = styled.h1`
@@ -50,6 +51,7 @@ export const Icon = styled.img`
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #0A1F28;
+  cursor: pointer;
 `;
 
 export const HStack = styled.div`
@@ -81,7 +83,6 @@ export const Label = styled.label`
   text-align: center;
   overflow: hidden;
   transition: linear 0.3s;
-
   color: #6e6e6edd;
   border-radius: 25px;
   font-weight: bolder;
@@ -103,8 +104,9 @@ export const Box = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${getColor};
+  margin-right: 40px;
   padding: 30px 40px;
-  width: 340px;
+  width: 300px;
   height: 300px;
   border-radius: 5%;
   align-items: flex-start;
@@ -124,4 +126,9 @@ export const Hr = styled.hr`
   width: 100%;
   border: none;
   border-bottom: 1px solid #fff;
+`
+
+export const Section = styled.section`
+  overflow-x: auto;
+  display: flex;
 `
