@@ -39,3 +39,5 @@ Acá van algunas cosas que pueden ser útiles (o no 👀):
 - [Husky](https://www.npmjs.com/package/husky)
 
 ## Respuesta
+
+Propongo que se implementen procedimientos almacenados para hacer la consulta o consultas al actualizar la información, de esta manera aumnetaria el rendimiento del backend porque el servidor haria todo el trabajo con respecto al manejo de la información del alumno.
