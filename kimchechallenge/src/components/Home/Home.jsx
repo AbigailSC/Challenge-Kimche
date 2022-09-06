@@ -1,31 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Flex, Section, Text } from "../../styles/globalStyles";
 import { CardCountry } from "../CardCountry/CardCountry";
 import { Searchbar } from "../Searchbar/Searchbar";
 import { SelectRadio } from "../SelectRadio/SelectRadio";
+import CountryContext from "../../context/Country/CountryContext";
 import _ from "lodash";
 
 export const Home = () => {
-  const [ findCountry, setFindCountry ] = useState(null);
+  const countriesState = useContext(CountryContext);
   const [ selection, setSelection ] = useState("continent");
   let countryIndex = [];
   // Declare el estado inicial en continent para que por defecto los agrupe por continente
-  const handleSubmit = (e) => {
-    setFindCountry(e)
-  };
   const handleSelection = (e) => {
     setSelection(e)
   };
-  const groupDataBy = _.groupBy(findCountry, selection === "continent" ? "continent.name" : "languages[0].name");
+  const groupDataBy = _.groupBy(countriesState.country, selection === "continent" ? "continent.name" : "languages[0].name");
   for (const property in groupDataBy) {
     countryIndex.push(property)
   };
   return (
   <>
-    <Searchbar handleSubmit={handleSubmit} />
+    <Searchbar/>
     <SelectRadio handleSelection={handleSelection}/>
     {
-      findCountry?.length
+      countriesState.country?.length
       ? countryIndex?.map((ele, index) => 
       <Flex key={index}>
         <Text fontWeight="bolder" fontsize="28px">{ele}</Text>
